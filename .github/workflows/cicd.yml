@@ -1,4 +1,4 @@
-name: Deploy DALLE-Backend
+name: Deploy dalle_backend
 on: 
   push:
     branches:
