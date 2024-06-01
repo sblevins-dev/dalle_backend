@@ -12,6 +12,7 @@ const openaiAPI = new OpenAI({
 
 const router = express.Router();
 
+// Find all chats in DB
 router.route('/').get(async (req, res) => {
     try {
         const chats = await Chat.find({});
@@ -22,6 +23,7 @@ router.route('/').get(async (req, res) => {
     }
 })
 
+// Find by chat by Id
 router.route('/find').get(async (req, res) => {
     try {
         // Assuming you're passing an ID in the request query parameter 'id'
@@ -41,6 +43,7 @@ router.route('/find').get(async (req, res) => {
     }
 })
 
+// Get a response chat from Chat-GPT
 router.route('/').post(async (req, res) => {
     try {
         const { userText } = req.body;
