@@ -2,6 +2,8 @@ import express from 'express';
 import { OpenAI } from 'openai'
 import * as dotenv from 'dotenv'
 
+import Chat from '../mongoDB/models/chat.js'
+
 dotenv.config();
 
 const openaiAPI = new OpenAI({
@@ -20,6 +22,11 @@ router.route('/').post(async (req, res) => {
                 content: userText,
             }],
             model: "gpt-3.5-turbo-1106"
+        })
+
+        const newChat = await Chat.create({
+            prompt: userText,
+            response: response.choices[0].message.content
         })
 
         res.status(200).json({ success: true, response})
