@@ -12,6 +12,16 @@ const openaiAPI = new OpenAI({
 
 const router = express.Router();
 
+router.route('/').get(async (req, res) => {
+    try {
+        const chats = await Chat.find({});
+
+        res.status(200).json({ success: true, data: chats });
+    } catch (error) {
+        res.status(500).json({ success: false, message: error });
+    }
+})
+
 router.route('/').post(async (req, res) => {
     try {
         const { userText } = req.body;
@@ -29,7 +39,7 @@ router.route('/').post(async (req, res) => {
             response: response.choices[0].message.content
         })
 
-        res.status(200).json({ success: true, response})
+        res.status(200).json({ success: true, response, newChat})
     } catch (error) {
         res.status(500).json({ success: false, message: 'Unable to retrieve a response'})
         console.log(error)
