@@ -22,6 +22,25 @@ router.route('/').get(async (req, res) => {
     }
 })
 
+router.route('/find').get(async (req, res) => {
+    try {
+        // Assuming you're passing an ID in the request query parameter 'id'
+        const itemId = req.query.id;
+
+        // Find the item by ID in the MongoDB collection using Mongoose
+        const foundItem = await Chat.findById(itemId);
+
+        if (!foundItem) {
+            return res.status(404).json({ error: 'Item not found' });
+        }
+
+        // If the item is found, send it back in the response
+        res.status(200).json(foundItem);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+})
+
 router.route('/').post(async (req, res) => {
     try {
         const { userText } = req.body;
@@ -39,9 +58,9 @@ router.route('/').post(async (req, res) => {
             response: response.choices[0].message.content
         })
 
-        res.status(200).json({ success: true, response, newChat})
+        res.status(200).json({ success: true, response, newChat })
     } catch (error) {
-        res.status(500).json({ success: false, message: 'Unable to retrieve a response'})
+        res.status(500).json({ success: false, message: 'Unable to retrieve a response' })
         console.log(error)
     }
 })
