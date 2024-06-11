@@ -30,8 +30,11 @@ router.route('/').post(async (req, res) => {
 
         res.status(200).json({ photo: image });
     } catch (error) {
-        console.log(error);
-        res.status(500).send(error?.response.error.message);
+        console.log(error.error.message);
+        if (error && error.error && error.error.message)
+            res.status(500).send(error.error.message);
+        else
+            res.status(500).send("An Error occurred.");
     }
 })
 
