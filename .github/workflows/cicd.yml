@@ -25,6 +25,6 @@ jobs:
       - name: Pull image from docker hub
         run: sudo docker pull sblevinsdev/dalle_backend:latest
       - name: Delete old container
-        run: docker rm -f dalle-backend-container
+        run: sudo docker rm -f dalle-backend-container
       - name: Run Docker Container
-        run: docker run -d -p 5555:5555 --name dalle-backend-container -e MONGODB_URL='${{ secrets.MONGODB_URL }}' -e OPENAI_API_KEY='${{ secrets.OPENAI_API_KEY }}' -e CLOUDINARY_CLOUD_NAME='${{ secrets.CLOUDINARY_CLOUD_NAME }}' -e CLOUDINARY_API_KEY='${{ secrets.CLOUDINARY_API_KEY }}' -e CLOUDINARY_API_SECRET='${{ secrets.CLOUDINARY_API_SECRET }}' sblevinsdev/dalle_backend:latest
+        run: sudo docker run -d -p 5555:5555 --name dalle-backend-container -e MONGODB_URL='${{ secrets.MONGODB_URL }}' -e OPENAI_API_KEY='${{ secrets.OPENAI_API_KEY }}' -e CLOUDINARY_CLOUD_NAME='${{ secrets.CLOUDINARY_CLOUD_NAME }}' -e CLOUDINARY_API_KEY='${{ secrets.CLOUDINARY_API_KEY }}' -e CLOUDINARY_API_SECRET='${{ secrets.CLOUDINARY_API_SECRET }}' sblevinsdev/dalle_backend:latest
