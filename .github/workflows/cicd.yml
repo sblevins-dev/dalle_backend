@@ -23,7 +23,7 @@ jobs:
     runs-on: self-hosted 
     steps:
       - name: Pull image from docker hub
-        run: docker pull sblevinsdev/dalle_backend:latest
+        run: sudo docker pull sblevinsdev/dalle_backend:latest
       - name: Delete old container
         run: docker rm -f dalle-backend-container
       - name: Run Docker Container
